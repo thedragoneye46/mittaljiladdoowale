@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mittalji Laddoo Wale — Coming Soon</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rozha+One&family=Karla:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@500;700&display=swap');
+
+  :root{
+    --maroon: #7F0038;
+    --maroon-dark: #4A0021;
+    --maroon-deep: #310016;
+    --saffron: #F2A93B;
+    --saffron-light: #FFC868;
+    --ivory: #FBF3E4;
+    --ivory-dim: #E9D9BC;
+    --forest: #26493C;
+    --gold: #CFA655;
+    --gold-deep: #A9803A;
+    --gold-soft: #E9CE94;
+    --ink: #2A1810;
+    --ink-soft: rgba(42,24,16,0.74);
+    --ink-faint: rgba(42,24,16,0.5);
+    --bg-1: #FCF6E9;
+    --bg-2: #F0E1BE;
+    --panel: #FFFCF5;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse 120% 80% at 50% -10%, var(--bg-1) 0%, var(--bg-2) 100%);
+    font-family:'Karla', sans-serif;
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    overflow-x:hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  .frame{
+    position:relative;
+    width:100%;
+    max-width:680px;
+    border:1px solid rgba(169,128,58,0.55);
+    outline:1px solid rgba(169,128,58,0.18);
+    outline-offset:6px;
+    border-radius:2px;
+    padding:56px 44px 40px;
+    background:var(--panel);
+    box-shadow:0 24px 60px rgba(122,60,20,0.14), 0 4px 16px rgba(122,60,20,0.08);
+  }
+
+  .corner{
+    position:absolute;
+    width:34px;
+    height:34px;
+    opacity:0.85;
+  }
+  .corner.tl{top:-1px; left:-1px;}
+  .corner.tr{top:-1px; right:-1px; transform:scaleX(-1);}
+  .corner.bl{bottom:-1px; left:-1px; transform:scaleY(-1);}
+  .corner.br{bottom:-1px; right:-1px; transform:scale(-1,-1);}
+
+  .content{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+
+  .eyebrow{
+    margin:0 0 18px;
+    font-family:'Karla', sans-serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:0.42em;
+    text-transform:uppercase;
+    color:var(--maroon);
+    opacity:0;
+    animation:fadeUp 0.8s ease forwards;
+    animation-delay:0.1s;
+  }
+  .eyebrow::before,.eyebrow::after{
+    content:'';
+    display:inline-block;
+    width:22px;
+    height:1px;
+    background:var(--gold-deep);
+    vertical-align:middle;
+    margin:0 10px 3px;
+  }
+
+  .logo-plate{
+    display:inline-block;
+    margin:2px 0 30px;
+    opacity:0;
+    animation:fadeUp 0.9s ease forwards;
+    animation-delay:0.25s;
+  }
+  .logo-plate img{
+    width:min(340px, 76vw);
+    height:auto;
+    display:block;
+    filter:drop-shadow(0 10px 20px rgba(122,60,20,0.16));
+  }
+
+  .tagline{
+    max-width:420px;
+    font-size:16px;
+    line-height:1.6;
+    color:var(--ink-soft);
+    margin:0 0 34px;
+    opacity:0;
+    animation:fadeUp 0.9s ease forwards;
+    animation-delay:0.45s;
+  }
+  .tagline em{
+    color:var(--maroon);
+    font-style:normal;
+    font-weight:600;
+  }
+
+  .notify{
+    width:100%;
+    max-width:400px;
+    display:flex;
+    gap:0;
+    margin:0 0 14px;
+    opacity:0;
+    animation:fadeUp 0.9s ease forwards;
+    animation-delay:0.7s;
+  }
+  .notify input[type="email"]{
+    flex:1;
+    min-width:0;
+    padding:14px 16px;
+    background:#FFFFFF;
+    border:1px solid rgba(169,128,58,0.55);
+    border-right:none;
+    color:var(--ink);
+    font-family:'Karla', sans-serif;
+    font-size:14px;
+    border-radius:2px 0 0 2px;
+  }
+  .notify input[type="email"]::placeholder{color:var(--ink-faint);}
+  .notify input[type="email"]:focus{
+    outline:none;
+    background:#FFFFFF;
+    box-shadow:inset 0 0 0 1px var(--maroon);
+  }
+  .notify button{
+    padding:14px 22px;
+    background:var(--maroon);
+    color:var(--ivory);
+    border:1px solid var(--maroon);
+    font-family:'Karla', sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    border-radius:0 2px 2px 0;
+    cursor:pointer;
+    transition:background 0.2s ease, transform 0.2s ease;
+    white-space:nowrap;
+  }
+  .notify button:hover{background:var(--maroon-dark);}
+  .notify button:focus-visible, .notify input:focus-visible{
+    outline:2px solid var(--gold-deep);
+    outline-offset:2px;
+  }
+  .notify button:active{transform:translateY(1px);}
+
+  .notify-note{
+    font-size:12.5px;
+    color:var(--ink-faint);
+    margin:0 0 40px;
+    min-height:16px;
+    opacity:0;
+    animation:fadeUp 0.9s ease forwards;
+    animation-delay:0.8s;
+  }
+  .notify-note.confirmed{color:var(--maroon); font-weight:600;}
+
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin:0 0 8px;
+    opacity:0;
+    animation:fadeUp 0.9s ease forwards;
+    animation-delay:0.9s;
+  }
+  .chip{
+    padding:8px 16px;
+    border:1px solid rgba(169,128,58,0.4);
+    border-radius:100px;
+    font-size:12px;
+    letter-spacing:0.03em;
+    color:var(--ink-soft);
+    background:rgba(255,255,255,0.5);
+  }
+
+  hr.rule{
+    width:60px;
+    border:none;
+    border-top:1px solid rgba(169,128,58,0.45);
+    margin:36px 0 22px;
+  }
+
+  footer{
+    text-align:center;
+    font-size:12px;
+    color:var(--ink-faint);
+    line-height:1.8;
+  }
+  footer a{color:var(--maroon); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  @media (max-width:480px){
+    .frame{padding:44px 22px 30px;}
+    .notify{flex-direction:column;}
+    .notify input[type="email"]{border-right:1px solid rgba(169,128,58,0.55); border-radius:2px 2px 0 0;}
+    .notify button{border-radius:0 0 2px 2px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="frame">
+
+  <svg class="corner tl" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 34V6C0 2.7 2.7 0 6 0H34" stroke="#A9803A" stroke-width="1"/>
+    <circle cx="10" cy="10" r="3" stroke="#A9803A" stroke-width="1"/>
+    <path d="M0 20 Q14 20 20 0" stroke="#A9803A" stroke-width="0.75" opacity="0.7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 34V6C0 2.7 2.7 0 6 0H34" stroke="#A9803A" stroke-width="1"/>
+    <circle cx="10" cy="10" r="3" stroke="#A9803A" stroke-width="1"/>
+    <path d="M0 20 Q14 20 20 0" stroke="#A9803A" stroke-width="0.75" opacity="0.7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 34V6C0 2.7 2.7 0 6 0H34" stroke="#A9803A" stroke-width="1"/>
+    <circle cx="10" cy="10" r="3" stroke="#A9803A" stroke-width="1"/>
+    <path d="M0 20 Q14 20 20 0" stroke="#A9803A" stroke-width="0.75" opacity="0.7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 34V6C0 2.7 2.7 0 6 0H34" stroke="#A9803A" stroke-width="1"/>
+    <circle cx="10" cy="10" r="3" stroke="#A9803A" stroke-width="1"/>
+    <path d="M0 20 Q14 20 20 0" stroke="#A9803A" stroke-width="0.75" opacity="0.7"/>
+  </svg>
+
+  <div class="content">
+
+    <p class="eyebrow">Opening Soon</p>
+
+    <div class="logo-plate">
+      <img src="assets/mittalji-logo.png" alt="Mittalji Laddoowale logo">
+    </div>
+
+    <p class="tagline">Handcrafted mithai from a family kitchen, made the way it always has been — now packed for a doorstep down the street, or one <em>halfway across the world.</em></p>
+
+    <form class="notify" id="notifyForm">
+      <label for="notifyEmail" class="sr-only" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);">Email address</label>
+      <input type="email" id="notifyEmail" placeholder="you@example.com" required>
+      <button type="submit">Notify Me</button>
+    </form>
+    <p class="notify-note" id="notifyNote">We'll write once, the day the shop opens. No spam, promise.</p>
+
+    <div class="chips">
+      <span class="chip">Pure Ghee &amp; Traditional Recipes</span>
+      <span class="chip">Delivery Across India</span>
+      <span class="chip">Shipping Worldwide</span>
+    </div>
+
+    <hr class="rule">
+
+    <footer>
+      info@mittaljiladdoowale.com<br>
+      &copy; 2026 Mittal Associates. All Rights Reserved.
+    </footer>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('notifyForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = document.getElementById('notifyEmail').value.trim();
+    var note = document.getElementById('notifyNote');
+    if(email){
+      note.textContent = "Thank you — we'll let you know the moment we open.";
+      note.classList.add('confirmed');
+      document.getElementById('notifyEmail').value = '';
+    }
+  });
+</script>
+
+</body>
+</html>
